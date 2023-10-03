@@ -1,8 +1,8 @@
 #include <stdexcept>
 #include <iostream>
-// #include <curlpp/cURLpp.hpp>
-// #include <curlpp/Easy.hpp>
-// #include <curlpp/Options.hpp>
+#include <curlpp/cURLpp.hpp>
+#include <curlpp/Easy.hpp>
+#include <curlpp/Options.hpp>
 
 #include "Account.hpp"
 #include "Utils.hpp"
@@ -92,7 +92,7 @@ std::string Account::getJwtToken( const std::string& url ) const
     const Message message( address, std::make_shared< StarknetDomain >( starknetDomain ), std::make_shared< Auth >( auth ) );
     const auto hash = message.hash();
     const auto signature = signer.signMessage( message );
-
+    
     const uint64_t now = auth.getNow().count();
     const uint64_t expiry = auth.getExpiry().count();
 
@@ -127,38 +127,37 @@ std::string Account::getJwtToken( const std::string& url ) const
         replace( &expiryHeader, "%1", strExpiry );
 
         // Set the required headers
-        // std::list< std::string > headers{ accountHeader, signatureHeader, hashHeader, nowHeader, expiryHeader };
+        std::list< std::string > headers{ accountHeader, signatureHeader, hashHeader, nowHeader, expiryHeader };
 
-        // // Initialize cURLpp
-        // curlpp::Cleanup cleanup;
-        // curlpp::Easy request;
+        // Initialize cURLpp
+        curlpp::Cleanup cleanup;
+        curlpp::Easy request;
 
-        // // Set the URL and request data
-        // request.setOpt( new curlpp::options::Url( url ) );
-        // request.setOpt( new curlpp::options::PostFields( data ) );
-        // request.setOpt( new curlpp::options::PostFieldSize( data.length() ) );
+        // Set the URL and request data
+        request.setOpt( new curlpp::options::Url( url ) );
+        request.setOpt( new curlpp::options::PostFields( data ) );
+        request.setOpt( new curlpp::options::PostFieldSize( data.length() ) );
 
-        // // Set the headers
-        // request.setOpt( new curlpp::options::HttpHeader( headers ) );
+        // Set the headers
+        request.setOpt( new curlpp::options::HttpHeader( headers ) );
 
-        // // Perform the POST request and get the response
-        // std::ostringstream responseStream;
-        // request.setOpt( new curlpp::options::WriteStream( &responseStream ) );
-        // request.perform();
+        // Perform the POST request and get the response
+        std::ostringstream responseStream;
+        request.setOpt( new curlpp::options::WriteStream( &responseStream ) );
+        request.perform();
 
-        // return responseStream.str();
-        return "tam-jwt";
+        return responseStream.str();
     }
-    // catch( curlpp::RuntimeError& e )
-    // {
-    //     std::cerr << "curlpp::RuntimeError: " << e.what() << std::endl;
-    //     throw e;
-    // }
-    // catch( curlpp::LogicError& e )
-    // {
-    //     std::cerr << "curlpp::LogicError: " << e.what() << std::endl;
-    //     throw e;
-    // }
+    catch( curlpp::RuntimeError& e )
+    {
+        std::cerr << "curlpp::RuntimeError: " << e.what() << std::endl;
+        throw e;
+    }
+    catch( curlpp::LogicError& e )
+    {
+        std::cerr << "curlpp::LogicError: " << e.what() << std::endl;
+        throw e;
+    }
     catch( SignerException& e )
     {
         std::cerr << e.what() << std::endl;
