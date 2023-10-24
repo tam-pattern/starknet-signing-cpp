@@ -83,6 +83,12 @@ void Account::removeLeadingZeroes( std::string* value )
 
 std::string Account::getJwtToken( const std::string& url ) const
 {
+    // Return random value as we removed libcurl
+    return "jwt-token";
+}
+
+std::list<std::string> Account::getHeadersList( const std::string& url ) const
+{
     using namespace std::chrono;
     using namespace starkware;
 
@@ -127,7 +133,7 @@ std::string Account::getJwtToken( const std::string& url ) const
         replace( &expiryHeader, "%1", strExpiry );
 
         // Set the required headers
-        // std::list< std::string > headers{ accountHeader, signatureHeader, hashHeader, nowHeader, expiryHeader };
+        return { accountHeader, signatureHeader, hashHeader, nowHeader, expiryHeader };
 
         // // Initialize cURLpp
         // curlpp::Cleanup cleanup;
@@ -147,7 +153,6 @@ std::string Account::getJwtToken( const std::string& url ) const
         // request.perform();
 
         // return responseStream.str();
-        return "tam-jwt";
     }
     // catch( curlpp::RuntimeError& e )
     // {
