@@ -26,4 +26,13 @@ std::vector< starkware::PrimeFieldElement > Message::pedersenEncode() const
     return { starknetMessage, domainHash, accountAddress, primaryTypeHash };
 }
 
+std::string Message::ToString() const
+{
+    const char* strStarknetMessage = "StarkNet Message";
+    const PrimeFieldElement starknetMessage = strToFelt( strStarknetMessage, std::strlen( strStarknetMessage ) );
+    const PrimeFieldElement domainHash = domain->hash();
+    const PrimeFieldElement primaryTypeHash = primaryType->hash();
+    return starknetMessage.ToString() + " - " + domainHash.ToString() + " - " + accountAddress.ToString() + " - " + primaryTypeHash.ToString();
+}
+
 } // namespace signer

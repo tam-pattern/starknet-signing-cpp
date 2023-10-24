@@ -13,6 +13,8 @@ class Message: public HashableIface
 
     virtual std::vector< starkware::PrimeFieldElement > pedersenEncode() const override;
 
+    std::string ToString() const;
+
   private:
 
     starkware::PrimeFieldElement accountAddress;
