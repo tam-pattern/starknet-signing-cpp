@@ -106,7 +106,7 @@ std::list<std::string> Account::getHeadersList( const std::string& url ) const
     {
         std::string data = "{}"; // Replace this with your POST request data (if any)
 
-        std::string accountHeader = "PARADEX-STARKNET-ACCOUNT: %1";
+        std::string accountHeader = "%1";
         {
             std::ostringstream s;
             s << address;
@@ -117,18 +117,18 @@ std::list<std::string> Account::getHeadersList( const std::string& url ) const
             replace( &accountHeader, "%1", strAddress );
         }
 
-        std::string signatureHeader = "PARADEX-STARKNET-SIGNATURE: [\"%1\", \"%2\"]";
+        std::string signatureHeader = "[\"%1\", \"%2\"]";
         replace( &signatureHeader, "%1", signature.first );
         replace( &signatureHeader, "%2", signature.second );
 
-        std::string hashHeader = "PARADEX-STARKNET-MESSAGE-HASH: %1";
+        std::string hashHeader = "%1";
         replace( &hashHeader, "%1", hash );
 
-        std::string nowHeader = "PARADEX-TIMESTAMP: %1";
+        std::string nowHeader = "%1";
         std::string strNow = std::to_string( now );
         replace( &nowHeader, "%1", strNow );
 
-        std::string expiryHeader = "PARADEX-SIGNATURE-EXPIRATION: %1";
+        std::string expiryHeader = "%1";
         std::string strExpiry = std::to_string( expiry );
         replace( &expiryHeader, "%1", strExpiry );
 
