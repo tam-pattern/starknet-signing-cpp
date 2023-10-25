@@ -1,6 +1,6 @@
 #pragma once
 
-#include <list>
+#include <vector>
 
 #include <starkware/algebra/prime_field_element.h>
 
@@ -22,7 +22,7 @@ class Account
     Message createAuthMessage() const;
 
     std::string getJwtToken(const std::string& url) const;
-    std::list<std::string> getHeadersList(const std::string& url) const;
+    std::vector<std::string> getHeadersList(const std::string& url) const;
 
   private:
     template <class T>

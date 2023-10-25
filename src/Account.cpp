@@ -87,7 +87,7 @@ std::string Account::getJwtToken( const std::string& url ) const
     return "jwt-token";
 }
 
-std::list<std::string> Account::getHeadersList( const std::string& url ) const
+std::vector<std::string> Account::getHeadersList( const std::string& url ) const
 {
     using namespace std::chrono;
     using namespace starkware;
