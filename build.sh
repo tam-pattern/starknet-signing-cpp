@@ -1,8 +1,9 @@
 # Building from zero everytime.
 rm -rf build && mkdir build
 
-export CMAKE_CXX_COMPILER=$(which clang++)
-echo $CMAKE_CXX_COMPILER > /tmp/tam_log_cmake.txt
+# Overwrite CMakeLists.txt of crypto-cpp
+rm -rf ./libs/crypto-cpp/CMakeLists.txt
+cp ./overwrite_crypto_cpp/CMakeLists.txt ./libs/crypto-cpp/CMakeLists.txt
 
 cd ./libs/crypto-cpp && rm -rf build
 mkdir build && cd build
