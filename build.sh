@@ -1,6 +1,7 @@
 # Building from zero everytime.
 rm -rf build && mkdir build
 
+export CMAKE_CXX_COMPILER=$(which clang++)
 echo $CMAKE_CXX_COMPILER > /tmp/tam_log_cmake.txt
 
 cd ./libs/crypto-cpp && rm -rf build
