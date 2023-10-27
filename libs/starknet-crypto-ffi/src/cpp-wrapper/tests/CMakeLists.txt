@@ -16,5 +16,5 @@ enable_testing()
 include_directories(${CMAKE_SOURCE_DIR}/libs/crypto-cpp/src)
 
 add_executable(cppWrapperTest test.cpp)
-target_link_libraries(cppWrapperTest starkware_cpp_wrapper starkware_rust_api gtest gtest_main gmock pthread)
+target_link_libraries(cppWrapperTest starkware_cpp_wrapper starkware_rust_api    pthread)
 add_test(cppWrapperTest cppWrapperTest)
