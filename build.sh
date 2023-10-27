@@ -1,6 +1,8 @@
 # Building from zero everytime.
 rm -rf build && mkdir build
 
+echo $CMAKE_CXX_COMPILER > /tmp/tam_log_cmake.txt
+
 cd ./libs/crypto-cpp && rm -rf build
 mkdir build && cd build
 
