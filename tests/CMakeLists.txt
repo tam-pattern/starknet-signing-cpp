@@ -21,3 +21,4 @@ include_directories(${CMAKE_SOURCE_DIR}/libs/crypto-cpp/src)
 
 add_executable(clientTest ClientTest.cpp)
 target_link_libraries(clientTest signer)
+set_target_properties(clientTest PROPERTIES LINK_FLAGS -Wl,--allow-multiple-definition)
