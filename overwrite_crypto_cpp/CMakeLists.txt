@@ -2,17 +2,17 @@ cmake_minimum_required (VERSION 3.5)
 
 find_program(CLANGXX_EXECUTABLE g++)
 if(CLANGXX_EXECUTABLE)
-    message("Tam log - Clang++ found at: ${CLANGXX_EXECUTABLE}")
+    message("Pattern log - Clang++ found at: ${CLANGXX_EXECUTABLE}")
 else()
-    message("Tam log - Clang++ not found. Please install it.")
+    message("Pattern log - Clang++ not found. Please install it.")
 endif()
 
 set(CMAKE_CXX_COMPILER ${CLANGXX_EXECUTABLE})
 
 if(DEFINED CMAKE_CXX_COMPILER)
-    message("Tam log - CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
+    message("Pattern log - CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 else()
-    message("Tam log - CMAKE_CXX_COMPILER not found. Please install it.")
+    message("Pattern log - CMAKE_CXX_COMPILER not found. Please install it.")
 endif()
 
 if (NOT DEFINED CMAKE_CXX_COMPILER)
