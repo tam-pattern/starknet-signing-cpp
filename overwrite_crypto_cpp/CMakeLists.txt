@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.5)
 
-find_program(CLANGXX_EXECUTABLE clang++)
+find_program(CLANGXX_EXECUTABLE g++)
 if(CLANGXX_EXECUTABLE)
     message("Tam log - Clang++ found at: ${CLANGXX_EXECUTABLE}")
 else()
