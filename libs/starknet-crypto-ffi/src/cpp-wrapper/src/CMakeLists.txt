@@ -12,4 +12,5 @@ set (STATIC_LIBS ${STARKWARE_STARKEX} ${STARKWARE_CRYPTO} ${STARKWARE_ALGEBRA})
 
 set_target_properties(starkware_cpp_wrapper PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(starkware_cpp_wrapper PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(starkware_cpp_wrapper starkware_rust_api ${STATIC_LIBS} -Wl,--allow-multiple-definition)
+target_link_libraries(starkware_cpp_wrapper starkware_rust_api ${STATIC_LIBS})
+set_target_properties(starkware_cpp_wrapper PROPERTIES LINK_FLAGS -Wl,--allow-multiple-definition)
