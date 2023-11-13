@@ -8,7 +8,7 @@
 - conan
 
 # Conan setup
-In root run 
+In root run
 ```
 % sudo pip3 install -r requirements.txt
 ```
@@ -16,7 +16,7 @@ In root run
 # Compilation
 1)  Init submodule
     ```
-    git submodule update --init
+    git submodule update --recursive --remote
     ```
 
 2)  Run
@@ -26,7 +26,7 @@ In root run
 3) The compiled library resides in
    ```
    project-root/build/src/libsigner.a
-   ```    
+   ```
 # Running tests
 
 After successful compilation executables shall be located in: `project-root/build/tests`.
