@@ -16,7 +16,7 @@ In root run
 # Compilation
 1)  Init submodule
     ```
-    git submodule update --recursive --remote
+    git submodule update --init --recursive --remote
     ```
 
 2)  Run
