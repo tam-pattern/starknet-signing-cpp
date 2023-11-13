@@ -6,11 +6,8 @@ extern "C" {
     }
 
     const char* process_string(const char* input) {
-        std::string input_str(input);
-        input_str += "\0";
-
-        // Return this string
-        return input_str.c_str();
+        std::string* input_str = new std::string(input);
+        return input_str->c_str();
     }
 
     const char* get_string() {
