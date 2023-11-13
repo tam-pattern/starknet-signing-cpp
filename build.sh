@@ -4,10 +4,11 @@ else
     REPO_DIR=${PWD}
 fi
 
+# Fetch latest commit of summodules
+git submodule update --init --recursive --remote
+
 # Building from zero everytime.
 rm -rf ${REPO_DIR}/build && mkdir ${REPO_DIR}/build
-
-mkdir ${REPO_DIR}/tam_test1
 
 rm -rf ${REPO_DIR}/libs/crypto-cpp/build
 mkdir ${REPO_DIR}/libs/crypto-cpp/build && cd ${REPO_DIR}/libs/crypto-cpp/build
