@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(MessageSignature CXX)
 
-file(GLOB MessageSignatureSources *.cpp *.hpp)
+file(GLOB MessageSignatureSources *.cpp *.hpp *.cc *.h)
 
 include_directories(${CMAKE_SOURCE_DIR}/libs/crypto-cpp/src)
 add_library(signer STATIC ${MessageSignatureSources})
