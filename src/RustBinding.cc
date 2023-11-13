@@ -11,4 +11,8 @@ extern "C" {
         // Return this string
         return input_str.c_str();
     }
+
+    const char* get_string() {
+        return "Hello, world!";
+    }
 }

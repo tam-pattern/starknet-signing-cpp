@@ -6,4 +6,5 @@
 extern "C" {
     size_t test_get_jwt_size(size_t source_length);
     const char* process_string(const char* input);
+    const char* get_string();
 }
