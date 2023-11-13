@@ -1,4 +1,8 @@
-REPO_DIR=${PWD}
+if [ $# -eq 1 ]; then
+    REPO_DIR=$1
+else
+    REPO_DIR=${PWD}
+fi
 
 # Building from zero everytime.
 rm -rf ${REPO_DIR}/build && mkdir ${REPO_DIR}/build
