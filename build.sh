@@ -1,12 +1,11 @@
 if [ $# -eq 1 ]; then
     REPO_DIR=$1
+    # Fetch latest commit of summodules
+    cd ${REPO_DIR}
+    git submodule update --init --recursive --remote
 else
     REPO_DIR=${PWD}
 fi
-
-# Fetch latest commit of summodules
-cd ${REPO_DIR}
-git submodule update --init --recursive --remote
 
 # Building from zero everytime.
 rm -rf ${REPO_DIR}/build && mkdir ${REPO_DIR}/build
