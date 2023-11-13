@@ -5,6 +5,7 @@ else
 fi
 
 # Fetch latest commit of summodules
+cd ${REPO_DIR}
 git submodule update --init --recursive --remote
 
 # Building from zero everytime.
