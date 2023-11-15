@@ -73,20 +73,7 @@ StringVector RustSigner::get_headers_list()
 }
 
 extern "C" {
-    size_t test_get_jwt_size(size_t source_length) {
-        return 1200;
-    }
-
-    const char* process_string(const char* input) {
-        std::string* input_str = new std::string(input);
-        return input_str->c_str();
-    }
-
-    const char* get_string() {
-        return "Hello, world!";
-    }
-
-    StringVector get_headers_list(const char* starknet_address, const char* starknet_private_address, const char* chain_id) {
+    StringVector get_headers_list_from_cpp(const char* starknet_address, const char* starknet_private_address, const char* chain_id) {
         return RustSigner(starknet_address, starknet_private_address, chain_id).get_headers_list();
     }
 }

@@ -36,9 +36,3 @@ public:
     RustSigner(const std::string& starknet_address, const std::string& starknet_private_address, const std::string& chain_id);
     StringVector get_headers_list();
 };
-
-extern "C" {
-    size_t test_get_jwt_size(size_t source_length);
-    const char* process_string(const char* input);
-    const char* get_string();
-}
