@@ -2,18 +2,6 @@
 
 using namespace starkware;
 
-// Utils functions
-char* my_strdup(const char* str) {
-    if (str == nullptr) {
-        return nullptr;
-    }
-
-    size_t len = std::strlen(str) + 1; // include null character
-    char* new_str = new char[len];
-    std::strcpy(new_str, str);
-    return new_str;
-}
-
 BigInt<4> hex_string_to_big_int(const std::string &hex_str) {
   BigInt<4> result = BigInt<4>::Zero();
 
@@ -21,7 +9,7 @@ BigInt<4> hex_string_to_big_int(const std::string &hex_str) {
   size_t hex_str_len = hex_str.size();
   size_t i = (hex_str[0] == '0' && hex_str[1] == 'x') ? 2 : 0;
 
-  // [module] should be big enough, in this case [modulo] = 16 ^ 65 - 1
+  // [modulo] should be big enough, in this case [modulo] = 16 ^ 65 - 1
   BigInt<4> modulo =
       0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff_Z;
 
@@ -45,16 +33,29 @@ BigInt<4> double_to_big_int(double val) {
 
 StringVector StringVector::from_cpp_vector_string(const std::vector<std::string>& cpp_vector_string)
 {
-    StringVector res;
-    res.size = cpp_vector_string.size();
-    res.data = new const char*[res.size];
+    static StringVector* res = nullptr;
 
-    for (int i = 0; i < res.size; i++)
+    if (res == nullptr)
     {
-        res.data[i] = my_strdup(cpp_vector_string[i].c_str());
+        const size_t max_size = 10;
+
+        res = new StringVector();
+        res->size = max_size;
+        res->data = new char*[max_size];
+
+        for (int i = 0; i < max_size; i++)
+        {
+            res->data[i] = new char[500];
+        }
     }
 
-    return res;
+    res->size = cpp_vector_string.size();
+    for (int i = 0; i < res->size; i++)
+    {
+        std::strcpy(res->data[i], cpp_vector_string[i].c_str());
+    }
+
+    return *res;
 }
 
 RustSigner::RustSigner(const std::string& starknet_address, const std::string& starknet_private_address, const std::string& chain_id)

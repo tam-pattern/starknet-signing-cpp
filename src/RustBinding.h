@@ -17,7 +17,7 @@ using namespace signer;
 
 // Struct to represent vector of strings
 struct StringVector {
-    const char** data;
+    char** data;
     size_t size;
 
     static StringVector from_cpp_vector_string(const std::vector<std::string>& cpp_vector_string);
