@@ -12,6 +12,6 @@ starknet-core = "0.5.1"
 
 [lib]
 name = "starkware_rust_api"
-crate-type = ["staticlib"]
+crate-type = ["cdylib"]
 
 [workspace]
