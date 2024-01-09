@@ -13,4 +13,3 @@ set (STATIC_LIBS starkware_cpp_wrapper starkware_rust_api keccak ${STARKWARE_STA
 
 target_include_directories(signer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(signer ${STATIC_LIBS})
-set_target_properties(signer PROPERTIES LINK_FLAGS -Wl,--allow-multiple-definition)
