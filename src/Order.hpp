@@ -33,7 +33,7 @@ class Order: public HashableIface
     using Uint256 = starkware::PrimeFieldElement::ValueType;
 
     // TODO: fix strToBigInt constexpr issue with always returning BigInt<4>
-    Order( const std::string& theMarket, OrderSide theOrderSide, OrderType theOrderType, double theSize,
+    Order( const std::string& theMarket, OrderSide theOrderSide, OrderType theOrderType, uint64_t theSize,
         const std::optional< Uint256 >& theLimitPrice = std::nullopt);
 
     virtual std::vector< starkware::PrimeFieldElement > pedersenEncode() const override;
@@ -47,7 +47,7 @@ class Order: public HashableIface
     std::string market;
     OrderSide orderSide;
     OrderType orderType;
-    double size;
+    uint64_t size;
     std::optional< Uint256 > limitPrice;
 };
 

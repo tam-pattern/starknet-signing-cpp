@@ -50,7 +50,7 @@ starkware::PrimeFieldElement encodeOrderType( OrderType value )
     }
 }
 
-Order::Order( const std::string& theMarket, OrderSide theOrderSide, OrderType theOrderType, double theSize,
+Order::Order( const std::string& theMarket, OrderSide theOrderSide, OrderType theOrderType, uint64_t theSize,
     const std::optional< Uint256 >& theLimitPrice /* = std::nullopt */)
     : orderSide( theOrderSide )
     , market( theMarket )
@@ -95,7 +95,7 @@ std::vector< starkware::PrimeFieldElement > Order::pedersenEncode() const
     const PrimeFieldElement market = signer::strToFelt( this->market.c_str(), this->market.length() );
     const PrimeFieldElement chainSide = encodeChainSide( this->orderSide );
     const PrimeFieldElement orderType = signer::encodeOrderType( this->orderType );
-    const PrimeFieldElement chainSize = PrimeFieldElement::FromUint( size * 100000000 );
+    const PrimeFieldElement chainSize = PrimeFieldElement::FromUint( size );
     const PrimeFieldElement chainPrice = PrimeFieldElement::FromBigInt( getChainPrice() );
 
     return { orderTypeName, timestamp, market, chainSide, orderType, chainSize, chainPrice };
