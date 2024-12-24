@@ -1,6 +1,10 @@
 #include "RustBinding.h"
 
+#include <mutex>
+
 using namespace starkware;
+
+#define MAX_STRING_VECTOR 200
 
 BigInt<4> hex_string_to_big_int(const std::string &hex_str) {
   BigInt<4> result = BigInt<4>::Zero();
@@ -33,29 +37,43 @@ BigInt<4> double_to_big_int(double val) {
 
 StringVector StringVector::from_cpp_vector_string(const std::vector<std::string>& cpp_vector_string)
 {
-    static StringVector* res = nullptr;
+    static std::vector<StringVector> string_vector_list;
+    static int index = 0;
+    static std::mutex mutex;
 
-    if (res == nullptr)
+    std::unique_lock lock{mutex};
+
+    if (string_vector_list.size() == 0)
     {
-        const size_t max_size = 10;
+        string_vector_list.resize(MAX_STRING_VECTOR);
 
-        res = new StringVector();
-        res->size = max_size;
-        res->data = new char*[max_size];
+        for (size_t i = 0; i < MAX_STRING_VECTOR; i++) {
+            const size_t max_size = 10;
+            string_vector_list[i].size = max_size;
+            string_vector_list[i].data = new char*[max_size];
 
-        for (int i = 0; i < max_size; i++)
-        {
-            res->data[i] = new char[500];
+            for (int i = 0; i < max_size; i++)
+            {
+                string_vector_list[i].data[i] = new char[1000];
+            }
         }
     }
 
-    res->size = cpp_vector_string.size();
-    for (int i = 0; i < res->size; i++)
+    string_vector_list[index].size = cpp_vector_string.size();
+    for (int i = 0; i < string_vector_list[index].size; i++)
     {
-        std::strcpy(res->data[i], cpp_vector_string[i].c_str());
+        std::strcpy(string_vector_list[index].data[i], cpp_vector_string[i].c_str());
     }
 
-    return *res;
+    StringVector res = string_vector_list[index];
+
+    // Increase [index]
+    index++;
+    if (index >= MAX_STRING_VECTOR) {
+        index = 0;
+    }
+
+    return res;
 }
 
 RustSigner::RustSigner(const std::string& starknet_address, const std::string& starknet_private_address, const std::string& chain_id)
