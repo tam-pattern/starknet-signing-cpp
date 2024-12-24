@@ -43,15 +43,11 @@ StringVector StringVector::from_cpp_vector_string(const std::vector<std::string>
 
     std::unique_lock lock{mutex};
 
-    std::cout << "RustBinding - index = " << index << std::endl;
-
     if (string_vector_list.size() == 0)
     {
-        std::cout << "RustBinding - init [string_vector_list]:" << std::endl;
         string_vector_list.resize(MAX_STRING_VECTOR);
 
         for (size_t i = 0; i < MAX_STRING_VECTOR; i++) {
-            std::cout << "RustBinding - init [string_vector_list] i = " << i << std::endl;
             const size_t max_size = 10;
             string_vector_list[i].size = max_size;
             string_vector_list[i].data = new char*[max_size];
