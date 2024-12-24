@@ -37,24 +37,28 @@ BigInt<4> double_to_big_int(double val) {
 
 StringVector StringVector::from_cpp_vector_string(const std::vector<std::string>& cpp_vector_string)
 {
-    static std::vector<StringVector> string_vector_list;
+    static std::vector<StringVector> string_vector_list(0);
     static int index = 0;
     static std::mutex mutex;
 
     std::unique_lock lock{mutex};
 
+    std::cout << "RustBinding - index = " << index << std::endl;
+
     if (string_vector_list.size() == 0)
     {
+        std::cout << "RustBinding - init [string_vector_list]:" << std::endl;
         string_vector_list.resize(MAX_STRING_VECTOR);
 
         for (size_t i = 0; i < MAX_STRING_VECTOR; i++) {
+            std::cout << "RustBinding - init [string_vector_list] i = " << i << std::endl;
             const size_t max_size = 10;
             string_vector_list[i].size = max_size;
             string_vector_list[i].data = new char*[max_size];
 
-            for (int i = 0; i < max_size; i++)
+            for (int j = 0; j < max_size; j++)
             {
-                string_vector_list[i].data[i] = new char[1000];
+                string_vector_list[i].data[j] = new char[1000];
             }
         }
     }
